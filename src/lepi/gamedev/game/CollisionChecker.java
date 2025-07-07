@@ -1,6 +1,8 @@
 package lepi.gamedev.game;
 
 import lepi.gamedev.entity.Entity;
+import lepi.gamedev.objects.Ball;
+import lepi.gamedev.objects.GameObject;
 import lepi.gamedev.objects.WallDown;
 import lepi.gamedev.objects.WallUp;
 
@@ -14,7 +16,7 @@ public class CollisionChecker {
         this.gamePanel = gamePanel;
     }
 
-    public void checkObject(Entity entity, String direction) {
+    public void checkObject(Entity entity, String direction, GameObject object) {
 
         entity.collisionOn = false; // Reset before checks
 

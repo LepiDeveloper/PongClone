@@ -5,7 +5,7 @@ import lepi.gamedev.game.KeyHandler;
 
 import java.awt.*;
 
-public class MiddleLine extends Object{
+public class MiddleLine extends GameObject {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;

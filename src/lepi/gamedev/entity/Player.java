@@ -31,13 +31,13 @@ public class Player extends Entity {
         collisionOn = false;
 
         if (keyHandler.upPressed) {
-            gamePanel.collisionChecker.checkObject(this, "up");
+            gamePanel.collisionChecker.checkObject(this, "up", null);
             if (!collisionOn) {
                 y -= speed;
             }
 
         } else if (keyHandler.downPressed) {
-            gamePanel.collisionChecker.checkObject(this, "down");
+            gamePanel.collisionChecker.checkObject(this, "down", null);
             if (!collisionOn) {
                 y += speed;
             }

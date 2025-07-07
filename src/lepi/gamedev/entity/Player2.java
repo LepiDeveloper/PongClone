@@ -30,13 +30,13 @@ public class Player2  extends Entity {
         collisionOn = false;
 
         if (keyHandler.upPressedArrow) {
-            gamePanel.collisionChecker.checkObject(this, "up");
+            gamePanel.collisionChecker.checkObject(this, "up", null);
             if (!collisionOn) {
                 y -= speed;
             }
 
         } else if (keyHandler.downPressedArrow) {
-            gamePanel.collisionChecker.checkObject(this, "down");
+            gamePanel.collisionChecker.checkObject(this, "down", null);
             if (!collisionOn) {
                 y += speed;
             }

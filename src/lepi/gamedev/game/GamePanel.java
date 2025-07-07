@@ -2,6 +2,7 @@ package lepi.gamedev.game;
 
 import lepi.gamedev.entity.Player;
 import lepi.gamedev.entity.Player2;
+import lepi.gamedev.objects.Ball;
 import lepi.gamedev.objects.MiddleLine;
 import lepi.gamedev.objects.WallDown;
 import lepi.gamedev.objects.WallUp;
@@ -28,8 +29,9 @@ public class GamePanel extends JPanel implements Runnable {
     Player player = new Player(this, keyHandler);
     Player2 player2 = new Player2(this, keyHandler);
     MiddleLine middleLine = new MiddleLine(this, keyHandler);
-    WallDown wallDown = new WallDown(this, keyHandler);
-    WallUp wallUp = new WallUp(this, keyHandler);
+    public WallDown wallDown = new WallDown(this, keyHandler);
+    public WallUp wallUp = new WallUp(this, keyHandler);
+    Ball ball = new Ball(this, keyHandler);
 
      public GamePanel() {
          this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -79,6 +81,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         player2.update();
         player.update();
+
+        ball.moveBall();
     }
 
     public void paintComponent(Graphics g) {
@@ -89,6 +93,9 @@ public class GamePanel extends JPanel implements Runnable {
          wallUp.draw(g2d);
          middleLine.draw(g2d);
          wallDown.draw(g2d);
+
+         // Ball
+        ball.draw(g2d);
 
         // Players
          player2.draw(g2d);

@@ -5,7 +5,7 @@ import lepi.gamedev.game.KeyHandler;
 
 import java.awt.*;
 
-public class WallUp extends Object{
+public class WallUp extends GameObject {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
