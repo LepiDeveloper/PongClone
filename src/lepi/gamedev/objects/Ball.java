@@ -4,11 +4,13 @@ import lepi.gamedev.game.GamePanel;
 import lepi.gamedev.game.KeyHandler;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Ball extends GameObject {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
+    Random random = new Random();
 
     public Ball(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -26,7 +28,7 @@ public class Ball extends GameObject {
     }
 
     // this is update but for the ball
-    public void moveBall(){
+    public void moveBall() {
 
         // Bounce off top wall
         if (y <= gamePanel.wallUp.y + gamePanel.wallUp.objectSizeHeight) {
@@ -34,12 +36,14 @@ public class Ball extends GameObject {
         }
 
         // Bounce off bottom wall
-        if (y + objectSizeHeight >= gamePanel.wallDown.y) {
+        else if (y + objectSizeHeight >= gamePanel.wallDown.y) {
             dy = -Math.abs(dy); // move up
         }
 
         x += dx;
         y += dy;
+//        x = x + (random.nextBoolean() ? dx : -dx);
+//        y = y + (random.nextBoolean() ? dy : -dy);
 
     }
 
@@ -48,5 +52,16 @@ public class Ball extends GameObject {
         g2d.fillRect(x, y, objectSizeWidth, objectSizeHeight);
     }
 
+    //Reverse's the ball's change in x value
+    public void reverseX() {
+        dx *= -1;
+    }
+
+
+   //Reverse's the ball's change in y value
+    public void reverseY() {
+        dy *= -1;
+
+    }
 
 }

@@ -26,8 +26,8 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-    Player player = new Player(this, keyHandler);
-    Player2 player2 = new Player2(this, keyHandler);
+    public Player player = new Player(this, keyHandler);
+    public Player2 player2 = new Player2(this, keyHandler);
     MiddleLine middleLine = new MiddleLine(this, keyHandler);
     public WallDown wallDown = new WallDown(this, keyHandler);
     public WallUp wallUp = new WallUp(this, keyHandler);
@@ -83,6 +83,15 @@ public class GamePanel extends JPanel implements Runnable {
         player.update();
 
         ball.moveBall();
+
+        if(player.checkCollision(ball) || player2.checkCollision(ball)){
+            //reverse ball if they collide
+            ball.reverseX();
+
+            // here should also be the bounce count (later tho)
+
+        }
+
     }
 
     public void paintComponent(Graphics g) {
