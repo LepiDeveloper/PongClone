@@ -1,5 +1,6 @@
 package lepi.gamedev.game;
 
+import lepi.gamedev.entity.Entity;
 import lepi.gamedev.entity.Player;
 import lepi.gamedev.entity.Player2;
 import lepi.gamedev.objects.Ball;
@@ -84,11 +85,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         ball.moveBall();
 
-        if(player.checkCollision(ball) || player2.checkCollision(ball)){
-            //reverse ball if they collide
+        Entity collidedPaddle = collisionChecker.checkBallPaddleCollision(ball);
+        if (collidedPaddle != null) {
             ball.reverseX();
-
-            // here should also be the bounce count (later tho)
 
         }
 

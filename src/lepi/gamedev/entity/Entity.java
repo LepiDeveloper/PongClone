@@ -12,7 +12,7 @@ public class Entity {
     public int playerSizeWidth;
     public int playerSizeHeight;
 
-    // Collision - I do not know if I am using this
+    // Collision
     public Rectangle solidArea;
     public boolean collisionOn = false;
 }

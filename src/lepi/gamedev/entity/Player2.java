@@ -50,11 +50,6 @@ public class Player2  extends Entity {
         g2d.fillRect(x, y, playerSizeWidth, playerSizeHeight);
     }
 
-    public boolean checkCollision(Ball b) {
-        Rectangle paddleBounds = new Rectangle(x, y, playerSizeWidth, playerSizeHeight);
-        Rectangle ballBounds = new Rectangle(b.x, b.y, b.objectSizeWidth, b.objectSizeHeight);
-        return paddleBounds.intersects(ballBounds);
-    }
 
 
 }

@@ -15,6 +15,7 @@ public class Main {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+        window.setLocation(550,155);
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
