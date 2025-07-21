@@ -27,6 +27,7 @@ public class Main {
         window.setIconImage(img);
 
         gamePanel.requestFocusInWindow();
+        gamePanel.setUpGame();
         gamePanel.startGameThread();
 
     }

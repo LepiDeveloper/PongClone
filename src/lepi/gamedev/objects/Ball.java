@@ -42,11 +42,12 @@ public class Ball extends GameObject {
         // Bounce off top wall
         if (y <= gamePanel.wallUp.y + gamePanel.wallUp.objectSizeHeight) {
             dy = Math.abs(dy); // move down
+            gamePanel.playSE(1);
         }
-
         // Bounce off bottom wall
         else if (y + objectSizeHeight >= gamePanel.wallDown.y) {
             dy = -Math.abs(dy); // move up
+            gamePanel.playSE(1);
         }
 
         x += dx;

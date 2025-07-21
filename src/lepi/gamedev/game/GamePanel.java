@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     public WallUp wallUp = new WallUp(this, keyHandler);
     Ball ball = new Ball(this, keyHandler);
     public UI ui = new UI(this);
+    public Sound sound = new Sound();
 
      public GamePanel() {
          this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -46,6 +47,10 @@ public class GamePanel extends JPanel implements Runnable {
          this.playerScore = 0;
          this.player2Score = 0;
          this.bounceCount = 0;
+     }
+
+     public void setUpGame() {
+         playMusic(0);
      }
 
      public void startGameThread() {
@@ -100,6 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (collidedPaddle != null) {
             ball.reverseX();
             bounceCount++;
+            playSE(1);
 
         }
 
@@ -147,5 +153,19 @@ public class GamePanel extends JPanel implements Runnable {
          g2d.dispose();
     }
 
+    public void playMusic(int i) {
+         sound.setFile(i);
+         sound.play();
+         sound.loop();
+    }
+
+    public void stopMusic() {
+         sound.stop();
+    }
+
+    public void playSE(int i) {
+         sound.setFile(i);
+         sound.play();
+    }
 
 }
