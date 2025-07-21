@@ -26,7 +26,13 @@ public class GamePanel extends JPanel implements Runnable {
     public int playerScore, player2Score;
     public int bounceCount;
 
-    KeyHandler keyHandler = new KeyHandler();
+    // GAME STATE
+    public int gameState;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
+    KeyHandler keyHandler = new KeyHandler(this);
     Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyHandler);
@@ -50,7 +56,8 @@ public class GamePanel extends JPanel implements Runnable {
      }
 
      public void setUpGame() {
-         playMusic(0);
+         //playMusic(0);
+         gameState = titleState;
      }
 
      public void startGameThread() {
@@ -95,39 +102,42 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player2.update();
-        player.update();
+         if(gameState == playState) {
+             player2.update();
+             player.update();
 
-        ball.moveBall();
+             ball.moveBall();
 
-        // check paddle collision
-        Entity collidedPaddle = collisionChecker.checkBallPaddleCollision(ball);
-        if (collidedPaddle != null) {
-            ball.reverseX();
-            bounceCount++;
-            playSE(1);
+             // check paddle collision
+             Entity collidedPaddle = collisionChecker.checkBallPaddleCollision(ball);
+             if (collidedPaddle != null) {
+                 ball.reverseX();
+                 bounceCount++;
+                 playSE(1);
 
-        }
+             }
 
 
-        //check if someone lost
-        if(ball.x < 0){
-            //player has lost
-            player2Score++;
-            ball.setDefaultValues();
-        }
-        else if(ball.x > screenWidth){
-            //pc has lost
-            playerScore++;
-            ball.setDefaultValues();
-        }
+             //check if someone lost
+             if(ball.x < 0){
+                 //player has lost
+                 player2Score++;
+                 ball.setDefaultValues();
+             }
+             else if(ball.x > screenWidth){
+                 //pc has lost
+                 playerScore++;
+                 ball.setDefaultValues();
+             }
 
-        //increase speed after 5 bounces
-        if (bounceCount == 5){
-            bounceCount = 0;
-            ball.increaseSpeed();
-            System.out.println("Ball speed: " + ball.speed);
-        }
+             //increase speed after 5 bounces
+             if (bounceCount == 5){
+                 bounceCount = 0;
+                 ball.increaseSpeed();
+                 System.out.println("Ball speed: " + ball.speed);
+             }
+         }
+
 
     }
 
@@ -135,20 +145,28 @@ public class GamePanel extends JPanel implements Runnable {
          super.paintComponent(g);
 
          Graphics2D g2d = (Graphics2D) g;
-         // Objects
-         wallUp.draw(g2d);
-         middleLine.draw(g2d);
-         wallDown.draw(g2d);
 
-         // Ball
-        ball.draw(g2d);
+         // Title screen
+         if (gameState == titleState) {
+            ui.draw(g2d);
+         }
+         //others
+         else {
+             // Objects
+             wallUp.draw(g2d);
+             middleLine.draw(g2d);
+             wallDown.draw(g2d);
 
-        // Players
-         player2.draw(g2d);
-         player.draw(g2d);
+             // Ball
+             ball.draw(g2d);
 
-         // UI
-          ui.draw(g2d);
+             // Players
+             player2.draw(g2d);
+             player.draw(g2d);
+
+             // UI
+             ui.draw(g2d);
+         }
 
          g2d.dispose();
     }
