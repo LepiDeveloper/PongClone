@@ -23,6 +23,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxScreenRow * pixelSize; // 640 pixels
 
     int FPS = 60;
+    public int playerScore, player2Score;
+    public int bounceCount;
 
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
@@ -33,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public WallDown wallDown = new WallDown(this, keyHandler);
     public WallUp wallUp = new WallUp(this, keyHandler);
     Ball ball = new Ball(this, keyHandler);
+    public UI ui = new UI(this);
 
      public GamePanel() {
          this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -40,6 +43,9 @@ public class GamePanel extends JPanel implements Runnable {
          this.setDoubleBuffered(true); // this helps your game look smoother and cleaner by preventing flickering during animations. All the drawing happens first on an off-screen buffer. Once everything is fully drawn, that completed image is copied (flipped) to the screen in one go.
          this.addKeyListener(keyHandler);
          this.setFocusable(true);
+         this.playerScore = 0;
+         this.player2Score = 0;
+         this.bounceCount = 0;
      }
 
      public void startGameThread() {
@@ -50,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000 / FPS; // 0.1666 seconds
+        double drawInterval = 1000000000.0 / FPS; // 0.1666 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
          while(gameThread != null) {
@@ -61,14 +67,18 @@ public class GamePanel extends JPanel implements Runnable {
              // 2 Draw: draw the screen with the updated info
              repaint();
              try {
-                 double remmainingTime = nextDrawTime - System.nanoTime();
-                 remmainingTime = remmainingTime/1000000;
 
-                 if(remmainingTime < 0){
-                     remmainingTime = 0;
+                 double remainingTime = nextDrawTime - System.nanoTime();
+
+                 if(remainingTime > 0) {
+                     long sleepTimeMs = (long)(remainingTime / 1000000);
+                     int sleepTimeNanos = (int)(remainingTime % 1000000);
+
+                     if(sleepTimeMs > 0 || sleepTimeNanos > 0) {
+                         Thread.sleep(sleepTimeMs, sleepTimeNanos);
+                     }
                  }
 
-                 Thread.sleep((long) remmainingTime);
                  nextDrawTime += drawInterval;
 
              } catch (InterruptedException e) {
@@ -85,10 +95,32 @@ public class GamePanel extends JPanel implements Runnable {
 
         ball.moveBall();
 
+        // check paddle collision
         Entity collidedPaddle = collisionChecker.checkBallPaddleCollision(ball);
         if (collidedPaddle != null) {
             ball.reverseX();
+            bounceCount++;
 
+        }
+
+
+        //check if someone lost
+        if(ball.x < 0){
+            //player has lost
+            player2Score++;
+            ball.setDefaultValues();
+        }
+        else if(ball.x > screenWidth){
+            //pc has lost
+            playerScore++;
+            ball.setDefaultValues();
+        }
+
+        //increase speed after 5 bounces
+        if (bounceCount == 5){
+            bounceCount = 0;
+            ball.increaseSpeed();
+            System.out.println("Ball speed: " + ball.speed);
         }
 
     }
@@ -108,8 +140,11 @@ public class GamePanel extends JPanel implements Runnable {
         // Players
          player2.draw(g2d);
          player.draw(g2d);
-         g2d.dispose();
 
+         // UI
+          ui.draw(g2d);
+
+         g2d.dispose();
     }
 
 

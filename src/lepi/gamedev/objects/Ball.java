@@ -10,7 +10,6 @@ public class Ball extends GameObject {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
-    Random random = new Random();
 
     public Ball(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -20,11 +19,21 @@ public class Ball extends GameObject {
     }
 
     public void setDefaultValues() {
+
+        int xDirection = (dx == 0) ? 1 : (dx > 0 ? 1 : -1); // default to right if dx is 0
+        int yDirection = (dy == 0) ? 1 : (dy > 0 ? 1 : -1); // default to down if dy is 0
+
+
         x = 448; // left right
         y = 260; // up down
 
         objectSizeHeight = 15;
         objectSizeWidth = 15;
+
+        gamePanel.bounceCount = 0;
+        speed = 2;
+        dx = speed * xDirection;
+        dy = speed * yDirection;
     }
 
     // this is update but for the ball
@@ -42,8 +51,6 @@ public class Ball extends GameObject {
 
         x += dx;
         y += dy;
-//        x = x + (random.nextBoolean() ? dx : -dx);
-//        y = y + (random.nextBoolean() ? dy : -dy);
 
     }
 
@@ -61,7 +68,18 @@ public class Ball extends GameObject {
    //Reverse's the ball's change in y value
     public void reverseY() {
         dy *= -1;
+    }
+
+    public void increaseSpeed(){
+        if(speed < MAX_SPEED){
+            speed ++;
+
+            dx = (dx / Math.abs(dx)*speed);
+            dy = (dy / Math.abs(dy)*speed);
+
+        }
 
     }
+
 
 }

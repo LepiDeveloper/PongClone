@@ -54,9 +54,16 @@ public class CollisionChecker {
         Rectangle ballBounds = new Rectangle(ball.x, ball.y, ball.objectSizeWidth, ball.objectSizeHeight);
 
         if (ballBounds.intersects(player1Bounds)) {
-            return gamePanel.player;
-        } else if (ballBounds.intersects(player2Bounds)) {
-            return gamePanel.player2;
+            if (ball.dx < 0) {
+                ball.x = player.x + player.playerSizeWidth;
+                return gamePanel.player;
+            }
+        }
+        else if (ballBounds.intersects(player2Bounds)) {
+            if (ball.dx > 0) {
+                ball.x = player2.x - ball.objectSizeWidth;
+                return gamePanel.player2;
+            }
         }
 
         return null;
