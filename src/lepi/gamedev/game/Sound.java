@@ -10,9 +10,13 @@ public class Sound {
     Clip clip;
     URL soundURL[] = new URL[30];
 
+    // add you sound here
     public Sound() {
         soundURL[0] = getClass().getResource("/sound/Booty-Shake-Robot.wav");
-        soundURL[1] = getClass().getResource("/sound/select-sound.wav");
+        soundURL[1] = getClass().getResource("/sound/collision-sound.wav");
+        soundURL[2] = getClass().getResource("/sound/scroll_button.wav");
+        soundURL[3] = getClass().getResource("/sound/select_button.wav");
+
 
     }
 

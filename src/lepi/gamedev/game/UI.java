@@ -114,9 +114,75 @@ public class UI {
             if (commandNum == 2) {
                 g2.drawString(">", x-gamePanel.pixelSize, y);
             }
+        }
+        else if (titleScreenState == 2) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
 
+            String text = "Credits";
+            int x = 370;
+            int y = 80;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Game Made by Ervin Lepic";
+            x = 240;
+            y = 200;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Music Made by Context Sensitive";
+            y = 250;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Testers: Cota";
+            y = 300;
+            g2.drawString(text, x, y);
+
+            text = "Back";
+            x = 415;
+            y = 450;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
 
         }
+        else if (titleScreenState == 3) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+
+            String text = "Options";
+            int x = 370;
+            int y = 80;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Music:";
+            x = 240;
+            y = 200;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "SoundFx:";
+            y = 250;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Play Until: 10";
+            y = 300;
+            g2.drawString(text, x, y);
+
+            text = "Back";
+            x = 415;
+            y = 450;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+        }
+
 
 
 

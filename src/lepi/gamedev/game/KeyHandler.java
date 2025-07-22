@@ -28,12 +28,14 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.titleScreenState == 0) {
                 if(code == KeyEvent.VK_W) {
                     gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
                     if (gamePanel.ui.commandNum < 0) {
                         gamePanel.ui.commandNum = 3;
                     }
                 }
                 if(code == KeyEvent.VK_S) {
                     gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
                     if (gamePanel.ui.commandNum > 3) {
                         gamePanel.ui.commandNum = 0;
                     }
@@ -41,16 +43,22 @@ public class KeyHandler implements KeyListener {
                 }
                 if (code == KeyEvent.VK_ENTER) {
                     if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.playSE(3);
                         gamePanel.ui.titleScreenState = 1;
 
                     }
                     if (gamePanel.ui.commandNum == 1) {
                         // add options here
+                        gamePanel.playSE(3);
+                        gamePanel.ui.titleScreenState = 3;
                     }
                     if (gamePanel.ui.commandNum == 2) {
                         // add credits here
+                        gamePanel.playSE(3);
+                        gamePanel.ui.titleScreenState = 2;
                     }
                     if (gamePanel.ui.commandNum == 3) {
+                        gamePanel.playSE(3);
                         System.exit(0);
                     }
                 }
@@ -58,12 +66,14 @@ public class KeyHandler implements KeyListener {
             else if (gamePanel.ui.titleScreenState == 1) {
                 if(code == KeyEvent.VK_W) {
                     gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
                     if (gamePanel.ui.commandNum < 0) {
                         gamePanel.ui.commandNum = 2;
                     }
                 }
                 if(code == KeyEvent.VK_S) {
                     gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
                     if (gamePanel.ui.commandNum > 2) {
                         gamePanel.ui.commandNum = 0;
                     }
@@ -72,14 +82,63 @@ public class KeyHandler implements KeyListener {
                 if (code == KeyEvent.VK_ENTER) {
                     if (gamePanel.ui.commandNum == 0) {
                         gamePanel.gameState = gamePanel.playState; // add here the AI stuff
+                        gamePanel.playSE(3);
                         gamePanel.playMusic(0);
 
                     }
                     if (gamePanel.ui.commandNum == 1) {
                         gamePanel.gameState = gamePanel.playState;
+                        gamePanel.playSE(3);
                         gamePanel.playMusic(0);
                     }
                     if (gamePanel.ui.commandNum == 2) {
+                        gamePanel.playSE(3);
+                        gamePanel.ui.titleScreenState = 0;
+                    }
+                }
+            }
+            else if (gamePanel.ui.titleScreenState == 2) {
+                if(code == KeyEvent.VK_W) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum < 0) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+                if(code == KeyEvent.VK_S) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum > 0) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+
+                if (code == KeyEvent.VK_ENTER) {
+                    if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.playSE(3);
+                        gamePanel.ui.titleScreenState = 0;
+                    }
+                }
+            }
+            else if (gamePanel.ui.titleScreenState == 3) {
+                if(code == KeyEvent.VK_W) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum < 0) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+                if(code == KeyEvent.VK_S) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum > 0) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+
+                if (code == KeyEvent.VK_ENTER) {
+                    if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.playSE(3);
                         gamePanel.ui.titleScreenState = 0;
                     }
                 }
