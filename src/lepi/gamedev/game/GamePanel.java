@@ -31,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int optionsState = 3;
+
 
     KeyHandler keyHandler = new KeyHandler(this);
     Thread gameThread;
@@ -42,9 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
     public WallUp wallUp = new WallUp(this, keyHandler);
     Ball ball = new Ball(this, keyHandler);
     public UI ui = new UI(this);
-    public Sound sound = new Sound();
+    public Sound music = new Sound();
+    public Sound sfx = new Sound();
 
-     public GamePanel() {
+
+    public GamePanel() {
          this.setPreferredSize(new Dimension(screenWidth, screenHeight));
          this.setBackground(Color.BLACK);
          this.setDoubleBuffered(true); // this helps your game look smoother and cleaner by preventing flickering during animations. All the drawing happens first on an off-screen buffer. Once everything is fully drawn, that completed image is copied (flipped) to the screen in one go.
@@ -137,6 +141,9 @@ public class GamePanel extends JPanel implements Runnable {
                  System.out.println("Ball speed: " + ball.speed);
              }
          }
+         if (gameState == pauseState) {
+            // do nothing for now
+        }
 
 
     }
@@ -147,7 +154,7 @@ public class GamePanel extends JPanel implements Runnable {
          Graphics2D g2d = (Graphics2D) g;
 
          // Title screen
-         if (gameState == titleState) {
+         if (gameState == titleState || gameState == optionsState) {
             ui.draw(g2d);
          }
          //others
@@ -172,18 +179,31 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void playMusic(int i) {
-         sound.setFile(i);
-         sound.play();
-         sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-         sound.stop();
+        music.stop();
     }
 
     public void playSE(int i) {
-         sound.setFile(i);
-         sound.play();
+        sfx.setFile(i);
+        sfx.play();
     }
+
+    public void resetGame() {
+        ball.setDefaultValues();
+        player2.setDefaultValues();
+        player.setDefaultValues();
+
+        playerScore = 0;
+        player2Score = 0;
+        bounceCount = 0;
+    }
+
+
+
 
 }
