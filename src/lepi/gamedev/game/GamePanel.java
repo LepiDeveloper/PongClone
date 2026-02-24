@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
     public int playerScore, player2Score;
     public int bounceCount;
+    public int setScoreDifficulty;
 
     // GAME STATE
     public int gameState;
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int optionsState = 3;
+    public final int endState = 4;
 
 
     KeyHandler keyHandler = new KeyHandler(this);
@@ -57,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
          this.playerScore = 0;
          this.player2Score = 0;
          this.bounceCount = 0;
+         this.setScoreDifficulty = 1;
      }
 
      public void setUpGame() {
@@ -126,11 +129,19 @@ public class GamePanel extends JPanel implements Runnable {
              if(ball.x < 0){
                  //player has lost
                  player2Score++;
+                 if (player2Score == setScoreDifficulty) {
+                     System.out.println("Player Right won with sore: " + player2Score);
+                     gameState = endState;
+                 }
                  ball.setDefaultValues();
              }
              else if(ball.x > screenWidth){
                  //pc has lost
                  playerScore++;
+                 if (playerScore == setScoreDifficulty) {
+                     System.out.println("Player Left won with sore: " + player2Score);
+                     gameState = endState;
+                 }
                  ball.setDefaultValues();
              }
 

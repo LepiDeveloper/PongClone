@@ -23,6 +23,9 @@ public class UI {
         if (gamePanel.gameState == gamePanel.pauseState) {
             drawPauseScreen(g2);
         }
+        if (gamePanel.gameState == gamePanel.endState) {
+            drawEndGameScreen(g2);
+        }
         if (gamePanel.gameState == gamePanel.playState) {
             g2.setFont(scoreText);
             g2.setColor(Color.WHITE);
@@ -241,19 +244,11 @@ public class UI {
                 g2.drawString(">", x-gamePanel.pixelSize, y);
             }
 
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
-            text = "Play Until: 10";
-            y = 300;
-            g2.drawString(text, x, y);
-            if (commandNum == 2) {
-                g2.drawString(">", x-gamePanel.pixelSize, y);
-            }
-
             text = "Back";
             x = 415;
             y = 450;
             g2.drawString(text, x, y);
-            if (commandNum == 3) {
+            if (commandNum == 2) {
                 g2.drawString(">", x-gamePanel.pixelSize, y);
             }
 
@@ -267,9 +262,116 @@ public class UI {
             volumeWidth = 30 * gamePanel.sfx.sfxVolumeScale;
             g2.fillRect(420, 225, volumeWidth, 24);
         }
+        else if (titleScreenState == 4) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+
+            String text = "Score Difficulty";
+            int x = 270;
+            int y = 80;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Best of 3";
+            x = 370;
+            y = 200;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Best of 5";
+            y = 250;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Best of 10";
+            x = 360;
+            y = 300;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            text = "Back";
+            x = 400;
+            y = 450;
+            g2.drawString(text, x, y);
+            if (commandNum == 3) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+        }
+    }
+
+    public void drawEndGameScreen( Graphics2D g2) {
+
+        final int frameX = 270;
+        final int frameY = 80;
+        final int frameWidth = gamePanel.pixelSize*6;
+        final int frameHeight = gamePanel.pixelSize*7;
+
+        String text = "GAME OVER";
+        g2.setFont(g2.getFont().deriveFont(50f));
+        int x = 320;
+        int y = 135;
+
+        String text1 = "Player " + whoWon() + " Won";
+        int x1 = 350;
+        int y1 = 180;
+
+        String text2 = "Score " + gamePanel.playerScore + " | " + gamePanel.player2Score;
+        int x2 = 390;
+        int y2 = 230;
+
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight, g2);
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(35f));
+        g2.drawString(text1, x1, y1);
+
+        g2.setFont(g2.getFont().deriveFont(35f));
+        g2.drawString(text2, x2, y2);
+
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(35f));
+        int textX = frameX + 115;
+        int textY = frameY + 270;
+        final int lineHeight = 50;
+
+        g2.drawString("Play Again", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX-gamePanel.pixelSize, textY);
+        }
+        textY += lineHeight;
+
+        g2.drawString("Main Menu", textX-10, textY);
+        if (commandNum == 1) {
+            g2.drawString(">", textX-gamePanel.pixelSize, textY);
+        }
+        textY += lineHeight;
+
+    }
+
+
+    public String whoWon(){
+
+        String useText = "";
+
+        if(gamePanel.playerScore == gamePanel.setScoreDifficulty) {
+            useText = "Left";
+        }
+        if(gamePanel.player2Score == gamePanel.setScoreDifficulty) {
+            useText = "Right";
+        }
+
+        return useText;
     }
 
 
 
-
-}
+    }

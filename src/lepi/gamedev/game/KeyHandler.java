@@ -32,7 +32,7 @@ public class KeyHandler implements KeyListener {
             }
         }
 
-        // title state
+        // MAIN MENU SCREEN
         if(gamePanel.gameState == gamePanel.titleState || gamePanel.gameState == gamePanel.optionsState) {
             if (gamePanel.ui.titleScreenState == 0) {
                 if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
@@ -90,15 +90,12 @@ public class KeyHandler implements KeyListener {
                 }
                 if (code == KeyEvent.VK_ENTER) {
                     if (gamePanel.ui.commandNum == 0) {
-                        gamePanel.gameState = gamePanel.playState; // add here the AI stuff
                         gamePanel.playSE(3);
-                        gamePanel.playMusic(0);
-
+                        gamePanel.ui.titleScreenState = 4;
                     }
                     if (gamePanel.ui.commandNum == 1) {
-                        gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
-                        gamePanel.playMusic(0);
+                        gamePanel.ui.titleScreenState = 4;
                     }
                     if (gamePanel.ui.commandNum == 2) {
                         gamePanel.playSE(3);
@@ -134,19 +131,19 @@ public class KeyHandler implements KeyListener {
                     gamePanel.ui.commandNum--;
                     gamePanel.playSE(2);
                     if (gamePanel.ui.commandNum < 0) {
-                        gamePanel.ui.commandNum = 3;
+                        gamePanel.ui.commandNum = 2;
                     }
                 }
                 if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
                     gamePanel.ui.commandNum++;
                     gamePanel.playSE(2);
-                    if (gamePanel.ui.commandNum > 3) {
+                    if (gamePanel.ui.commandNum > 2) {
                         gamePanel.ui.commandNum = 0;
                     }
                 }
 
                 if (code == KeyEvent.VK_ENTER) {
-                    if (gamePanel.ui.commandNum == 3) {
+                    if (gamePanel.ui.commandNum == 2) {
                         gamePanel.playSE(3);
 
                         System.out.println("Current game state: " + gamePanel.gameState);
@@ -180,10 +177,64 @@ public class KeyHandler implements KeyListener {
                         gamePanel.playSE(2);
                     }
                 }
-
-
             }
+            else if (gamePanel.ui.titleScreenState == 4) {
+                if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum < 0) {
+                        gamePanel.ui.commandNum = 3;
+                    }
+                }
+                if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum > 3) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+
+                if (code == KeyEvent.VK_ENTER) {
+
+                    if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.setScoreDifficulty = 3;
+                        gamePanel.gameState = gamePanel.playState; // add here the AI stuff
+                        gamePanel.playSE(3);
+                        gamePanel.playMusic(0);
+
+                    }
+
+                    if (gamePanel.ui.commandNum == 1) {
+                        gamePanel.setScoreDifficulty = 5;
+                        gamePanel.gameState = gamePanel.playState;
+                        gamePanel.playSE(3);
+                        gamePanel.playMusic(0);
+                    }
+
+                    if (gamePanel.ui.commandNum == 2) {
+                        gamePanel.setScoreDifficulty = 10;
+                        gamePanel.gameState = gamePanel.playState;
+                        gamePanel.playSE(3);
+                        gamePanel.playMusic(0);
+                    }
+
+                    if (gamePanel.ui.commandNum == 3) {
+                        gamePanel.playSE(3);
+
+                        System.out.println("Current game state: " + gamePanel.gameState);
+                        if (gamePanel.gameState == gamePanel.titleState) {
+                            gamePanel.ui.titleScreenState = 1;
+                        }
+                        else if (gamePanel.gameState == gamePanel.optionsState) {
+                            gamePanel.gameState = gamePanel.pauseState;
+                        }
+                    }
+                }
+            }
+
         }
+
+        // PAUSE MENU SCREEN
         else if (gamePanel.gameState == gamePanel.pauseState) {
             if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gamePanel.ui.commandNum--;
@@ -233,6 +284,43 @@ public class KeyHandler implements KeyListener {
 
                 }
 
+            }
+        }
+
+        // END GAME SCREEN
+        else if (gamePanel.gameState == gamePanel.endState) {
+            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                gamePanel.ui.commandNum--;
+                gamePanel.playSE(2);
+                if (gamePanel.ui.commandNum < 0) {
+                    gamePanel.ui.commandNum = 1;
+                }
+            }
+            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                gamePanel.ui.commandNum++;
+                gamePanel.playSE(2);
+                if (gamePanel.ui.commandNum > 1) {
+                    gamePanel.ui.commandNum = 0;
+                }
+
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (gamePanel.ui.commandNum == 0) {
+                    // reset
+                    gamePanel.gameState = gamePanel.playState;
+                    gamePanel.resetGame();
+                    gamePanel.playSE(3);
+
+                }
+                if (gamePanel.ui.commandNum == 1) {
+                    // main menu
+                    gamePanel.stopMusic();
+                    gamePanel.playSE(3);
+                    gamePanel.gameState = gamePanel.titleState;
+                    gamePanel.ui.titleScreenState = 0;
+                    gamePanel.resetGame();
+
+                }
             }
         }
         else {
