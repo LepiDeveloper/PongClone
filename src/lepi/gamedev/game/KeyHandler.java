@@ -91,10 +91,12 @@ public class KeyHandler implements KeyListener {
                 if (code == KeyEvent.VK_ENTER) {
                     if (gamePanel.ui.commandNum == 0) {
                         gamePanel.playSE(3);
+                        gamePanel.isSolo = true;
                         gamePanel.ui.titleScreenState = 4;
                     }
                     if (gamePanel.ui.commandNum == 1) {
                         gamePanel.playSE(3);
+                        gamePanel.isSolo = false;
                         gamePanel.ui.titleScreenState = 4;
                     }
                     if (gamePanel.ui.commandNum == 2) {
@@ -198,7 +200,78 @@ public class KeyHandler implements KeyListener {
 
                     if (gamePanel.ui.commandNum == 0) {
                         gamePanel.setScoreDifficulty = 3;
-                        gamePanel.gameState = gamePanel.playState; // add here the AI stuff
+                        if (gamePanel.isSolo) {
+                            gamePanel.ui.titleScreenState = 5;
+                            gamePanel.playSE(3);
+                        }
+                        else {
+                            gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playSE(3);
+                            gamePanel.playMusic(0);
+                        }
+
+                    }
+
+                    if (gamePanel.ui.commandNum == 1) {
+                        gamePanel.setScoreDifficulty = 5;
+                        if (gamePanel.isSolo) {
+                            gamePanel.ui.titleScreenState = 5;
+                            gamePanel.playSE(3);
+                        }
+                        else {
+                            gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playSE(3);
+                            gamePanel.playMusic(0);
+                        }
+                    }
+
+                    if (gamePanel.ui.commandNum == 2) {
+                        gamePanel.setScoreDifficulty = 10;
+                        if (gamePanel.isSolo) {
+                            gamePanel.ui.titleScreenState = 5;
+                            gamePanel.playSE(3);
+                        }
+                        else {
+                            gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playSE(3);
+                            gamePanel.playMusic(0);
+                        }
+                    }
+
+                    if (gamePanel.ui.commandNum == 3) {
+                        gamePanel.playSE(3);
+
+                        System.out.println("Current game state: " + gamePanel.gameState);
+                        if (gamePanel.gameState == gamePanel.titleState) {
+                            gamePanel.ui.titleScreenState = 1;
+                        }
+                        else if (gamePanel.gameState == gamePanel.optionsState) {
+                            gamePanel.gameState = gamePanel.pauseState;
+                        }
+                    }
+                }
+            }
+            else if (gamePanel.ui.titleScreenState == 5 || gamePanel.isSolo) {
+                if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum < 0) {
+                        gamePanel.ui.commandNum = 3;
+                    }
+                }
+                if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSE(2);
+                    if (gamePanel.ui.commandNum > 3) {
+                        gamePanel.ui.commandNum = 0;
+                    }
+                }
+
+                if (code == KeyEvent.VK_ENTER) {
+
+                    if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.setScoreDifficulty = 3;
+                        gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
 

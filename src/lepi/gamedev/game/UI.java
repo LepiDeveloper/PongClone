@@ -304,6 +304,50 @@ public class UI {
             if (commandNum == 3) {
                 g2.drawString(">", x-gamePanel.pixelSize, y);
             }
+        }
+        else if (titleScreenState == 5) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+
+            String text = "Difficulty";
+            int x = 340;
+            int y = 80;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Easy";
+            x = 400;
+            y = 200;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Medium";
+            x = 380;
+            y = 250;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
+            text = "Hard";
+            x = 400;
+            y = 300;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
+
+            text = "Back";
+            x = 400;
+            y = 450;
+            g2.drawString(text, x, y);
+            if (commandNum == 3) {
+                g2.drawString(">", x-gamePanel.pixelSize, y);
+            }
 
         }
     }

@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int playerScore, player2Score;
     public int bounceCount;
     public int setScoreDifficulty;
+    public boolean isSolo;
 
     // GAME STATE
     public int gameState;
@@ -39,15 +40,16 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler(this);
     Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-    public Player player = new Player(this, keyHandler);
+    public Ball ball = new Ball(this, keyHandler);
+    public Player player = new Player(this, keyHandler, ball);
     public Player2 player2 = new Player2(this, keyHandler);
     MiddleLine middleLine = new MiddleLine(this, keyHandler);
     public WallDown wallDown = new WallDown(this, keyHandler);
     public WallUp wallUp = new WallUp(this, keyHandler);
-    Ball ball = new Ball(this, keyHandler);
     public UI ui = new UI(this);
     public Sound music = new Sound();
     public Sound sfx = new Sound();
+    public Difficulty difficulty;
 
 
     public GamePanel() {

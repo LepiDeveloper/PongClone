@@ -10,8 +10,11 @@ public class Player extends Entity {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
+    AIController aiController;
+    Ball ball;
 
-    public Player(GamePanel gamePanel, KeyHandler keyHandler) {
+    public Player(GamePanel gamePanel, KeyHandler keyHandler, Ball ball) {
+        aiController = new AIController(this, ball,  gamePanel);
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
@@ -31,18 +34,29 @@ public class Player extends Entity {
     public void update() {
         collisionOn = false;
 
-        if (keyHandler.upPressed) {
-            gamePanel.collisionChecker.checkObject(this, "up", null);
-            if (!collisionOn) {
-                y -= speed;
+        // This is solo
+        if (gamePanel.isSolo == true) {
+            aiController.update();
+        }
+
+        // This is multiplayer
+        if (gamePanel.isSolo == false) {
+
+            if (keyHandler.upPressed) {
+                gamePanel.collisionChecker.checkObject(this, "up", null);
+                if (!collisionOn) {
+                    y -= speed;
+                }
+
+            } else if (keyHandler.downPressed) {
+                gamePanel.collisionChecker.checkObject(this, "down", null);
+                if (!collisionOn) {
+                    y += speed;
+                }
             }
 
-        } else if (keyHandler.downPressed) {
-            gamePanel.collisionChecker.checkObject(this, "down", null);
-            if (!collisionOn) {
-                y += speed;
-            }
         }
+
 
     }
 
