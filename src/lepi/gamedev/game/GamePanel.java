@@ -13,6 +13,8 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    // ayo is this Lepi or Ervin Lepic. BTW delete
+
     final int originalPixelSize = 32; // this is 32x32
     final int scale = 2;
 
