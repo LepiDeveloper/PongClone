@@ -15,7 +15,17 @@ public class Ball extends GameObject {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-        setDefaultValues();
+        if(gamePanel.gameDifficulty == 1) {
+            setEasyValues();
+        }
+        if(gamePanel.gameDifficulty == 2) {
+            setDefaultValues();
+        }
+        if(gamePanel.gameDifficulty == 3) {
+            setHardValues();
+        }
+
+
     }
 
     public void setDefaultValues() {
@@ -31,9 +41,50 @@ public class Ball extends GameObject {
         objectSizeWidth = 15;
 
         gamePanel.bounceCount = 0;
-        speed = 2;
         dx = speed * xDirection;
         dy = speed * yDirection;
+        System.out.println("Starting ball speed is: " + speed);
+
+    }
+
+    public void setEasyValues() {
+
+        int xDirection = (dx == 0) ? 1 : (dx > 0 ? 1 : -1); // default to right if dx is 0
+        int yDirection = (dy == 0) ? 1 : (dy > 0 ? 1 : -1); // default to down if dy is 0
+
+
+        x = 448; // left right
+        y = 260; // up down
+
+        objectSizeHeight = 15;
+        objectSizeWidth = 15;
+
+        MAX_SPEED = 8;
+        speed = 3;
+        gamePanel.bounceCount = 0;
+        dx = speed * xDirection;
+        dy = speed * yDirection;
+        System.out.println("Starting ball speed is: " + speed);
+    }
+
+    public void setHardValues() {
+
+        int xDirection = (dx == 0) ? 1 : (dx > 0 ? 1 : -1); // default to right if dx is 0
+        int yDirection = (dy == 0) ? 1 : (dy > 0 ? 1 : -1); // default to down if dy is 0
+
+
+        x = 448; // left right
+        y = 260; // up down
+
+        objectSizeHeight = 15;
+        objectSizeWidth = 15;
+
+        MAX_SPEED = 12;
+        speed = 7;
+        gamePanel.bounceCount = 0;
+        dx = speed * xDirection;
+        dy = speed * yDirection;
+        System.out.println("Starting ball speed is: " + speed);
     }
 
     // this is update but for the ball
@@ -72,12 +123,35 @@ public class Ball extends GameObject {
     }
 
     public void increaseSpeed(){
-        if(speed < MAX_SPEED){
-            speed ++;
 
-            dx = (dx / Math.abs(dx)*speed);
-            dy = (dy / Math.abs(dy)*speed);
+        if(gamePanel.gameDifficulty == 1) {
 
+            if(speed < MAX_SPEED){
+                speed ++;
+
+                dx = (dx / Math.abs(dx)*speed);
+                dy = (dy / Math.abs(dy)*speed);
+
+            }
+        }
+        if(gamePanel.gameDifficulty == 2) {
+            if(speed < MAX_SPEED){
+                speed ++;
+
+                dx = (dx / Math.abs(dx)*speed);
+                dy = (dy / Math.abs(dy)*speed);
+
+            }
+        }
+        if(gamePanel.gameDifficulty == 3) {
+
+            if(speed < MAX_SPEED){
+                speed ++;
+
+                dx = (dx / Math.abs(dx)*speed);
+                dy = (dy / Math.abs(dy)*speed);
+
+            }
         }
 
     }

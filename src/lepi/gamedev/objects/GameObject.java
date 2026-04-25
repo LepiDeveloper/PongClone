@@ -12,8 +12,8 @@ public class GameObject {
     public int objectSizeHeight;
 
     // ball speed
-    public int MAX_SPEED = 7;
-    public int speed = 2;
+    public int MAX_SPEED = 10;
+    public int speed = 5;
 
     // ball vertical and horizontal speed/
     public int dx = speed;

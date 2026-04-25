@@ -13,8 +13,6 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    // ayo is this Lepi or Ervin Lepic. BTW delete
-
     final int originalPixelSize = 32; // this is 32x32
     final int scale = 2;
 
@@ -28,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int playerScore, player2Score;
     public int bounceCount;
     public int setScoreDifficulty;
+    public int gameDifficulty; // 1 is easy, 2 normal, and 3 hard
     public boolean isSolo;
 
     // GAME STATE
@@ -137,7 +136,16 @@ public class GamePanel extends JPanel implements Runnable {
                      System.out.println("Player Right won with sore: " + player2Score);
                      gameState = endState;
                  }
-                 ball.setDefaultValues();
+                 //check ball difficulty
+                 if(gameDifficulty == 1) {
+                     ball.setEasyValues();
+                 }
+                 if(gameDifficulty == 2) {
+                     ball.setDefaultValues();
+                 }
+                 if(gameDifficulty == 3) {
+                     ball.setHardValues();
+                 }
              }
              else if(ball.x > screenWidth){
                  //pc has lost
@@ -146,7 +154,16 @@ public class GamePanel extends JPanel implements Runnable {
                      System.out.println("Player Left won with sore: " + player2Score);
                      gameState = endState;
                  }
-                 ball.setDefaultValues();
+                 //check ball difficulty
+                 if(gameDifficulty == 1) {
+                     ball.setEasyValues();
+                 }
+                 if(gameDifficulty == 2) {
+                     ball.setDefaultValues();
+                 }
+                 if(gameDifficulty == 3) {
+                     ball.setHardValues();
+                 }
              }
 
              //increase speed after 5 bounces
@@ -194,13 +211,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void playMusic(int i) {
-        music.setFile(i);
-        music.play();
-        music.loop();
+//        music.setFile(i);
+//        music.play();
+//        music.loop();
     }
 
     public void stopMusic() {
-        music.stop();
+//        music.stop();
     }
 
     public void playSE(int i) {
@@ -209,7 +226,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void resetGame() {
+        //check ball difficulty
+
+        ball.setEasyValues();
         ball.setDefaultValues();
+        ball.setHardValues();
+
         player2.setDefaultValues();
         player.setDefaultValues();
 

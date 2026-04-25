@@ -270,7 +270,7 @@ public class KeyHandler implements KeyListener {
                 if (code == KeyEvent.VK_ENTER) {
 
                     if (gamePanel.ui.commandNum == 0) {
-                        gamePanel.setScoreDifficulty = 3;
+                        gamePanel.gameDifficulty = 1;
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
@@ -278,14 +278,14 @@ public class KeyHandler implements KeyListener {
                     }
 
                     if (gamePanel.ui.commandNum == 1) {
-                        gamePanel.setScoreDifficulty = 5;
+                        gamePanel.gameDifficulty = 2;
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
                     }
 
                     if (gamePanel.ui.commandNum == 2) {
-                        gamePanel.setScoreDifficulty = 10;
+                        gamePanel.gameDifficulty = 3;
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
