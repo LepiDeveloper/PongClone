@@ -11,7 +11,6 @@ public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
     AIController aiController;
-    Ball ball;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler, Ball ball) {
         aiController = new AIController(this, ball,  gamePanel);
@@ -20,7 +19,21 @@ public class Player extends Entity {
 
         solidArea = new Rectangle(x, y, playerSizeWidth, playerSizeHeight);
 
-        setDefaultValues();
+        if (gamePanel.isSolo) {
+            if(gamePanel.gameDifficulty == 1) {
+                setEasyValuesPlayer();
+            }
+            if(gamePanel.gameDifficulty == 2) {
+                setDefaultValues();
+            }
+            if(gamePanel.gameDifficulty == 3) {
+                setHardValuesPlayer();
+            }
+        }
+        else {
+            setDefaultValues();
+        }
+
     }
 
     public void setDefaultValues() {
@@ -29,6 +42,26 @@ public class Player extends Entity {
         speed = 4;
         playerSizeHeight = 80;
         playerSizeWidth = 15;
+        System.out.println(" AI Player speed is: " + speed);
+    }
+
+    public void setEasyValuesPlayer() {
+        x = 18; // left right
+        y = 280;   // up down
+        speed = 2;
+        playerSizeHeight = 80;
+        playerSizeWidth = 15;
+        System.out.println(" AI Player speed is: " + speed);
+
+    }
+
+    public void setHardValuesPlayer() {
+        x = 18; // left right
+        y = 280;   // up down
+        speed = 6;
+        playerSizeHeight = 80;
+        playerSizeWidth = 15;
+        System.out.println(" AI Player speed is: " + speed);
     }
 
     public void update() {

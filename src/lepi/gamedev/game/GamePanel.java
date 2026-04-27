@@ -238,8 +238,23 @@ public class GamePanel extends JPanel implements Runnable {
             ball.setHardValues();
         }
 
+
+        if (isSolo) {
+            if(gameDifficulty == 1) {
+                player.setEasyValuesPlayer();
+            }
+            if(gameDifficulty == 2) {
+                player.setDefaultValues();
+            }
+            if(gameDifficulty == 3) {
+                player.setHardValuesPlayer();
+            }
+        }
+        else {
+            player.setDefaultValues();
+        }
+
         player2.setDefaultValues();
-        player.setDefaultValues();
 
         playerScore = 0;
         player2Score = 0;

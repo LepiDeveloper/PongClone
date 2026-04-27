@@ -15,16 +15,19 @@ public class AIController {
         this.gamePanel = gamePanel;
     }
 
+
     public void update() {
         player.collisionOn = false;
+        int aiY = player.y + (player.playerSizeHeight / 2);
+        int ballY = ball.y + (ball.objectSizeHeight / 2);
 
-        if (player.y > ball.y) {
+        if (aiY > ballY) {
             gamePanel.collisionChecker.checkObject(player, "up", null);
             if (!player.collisionOn) {
                     player.y -= player.speed;
             }
         }
-        else if (player.y < ball.y) {
+        else if (aiY < ballY) {
             gamePanel.collisionChecker.checkObject(player, "down", null);
             if (!player.collisionOn) {
                 player.y += player.speed;
