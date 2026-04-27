@@ -25,7 +25,6 @@ public class Ball extends GameObject {
             setHardValues();
         }
 
-
     }
 
     public void setDefaultValues() {
@@ -40,6 +39,8 @@ public class Ball extends GameObject {
         objectSizeHeight = 15;
         objectSizeWidth = 15;
 
+        MAX_SPEED = 10;
+        speed = 5;
         gamePanel.bounceCount = 0;
         dx = speed * xDirection;
         dy = speed * yDirection;

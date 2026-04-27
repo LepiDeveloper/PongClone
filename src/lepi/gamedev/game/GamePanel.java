@@ -228,9 +228,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void resetGame() {
         //check ball difficulty
 
-        ball.setEasyValues();
-        ball.setDefaultValues();
-        ball.setHardValues();
+        if(gameDifficulty == 1) {
+            ball.setEasyValues();
+        }
+        if(gameDifficulty == 2) {
+            ball.setDefaultValues();
+        }
+        if(gameDifficulty == 3) {
+            ball.setHardValues();
+        }
 
         player2.setDefaultValues();
         player.setDefaultValues();

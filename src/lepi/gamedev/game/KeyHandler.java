@@ -272,6 +272,7 @@ public class KeyHandler implements KeyListener {
                     if (gamePanel.ui.commandNum == 0) {
                         gamePanel.gameDifficulty = 1;
                         gamePanel.gameState = gamePanel.playState;
+                        gamePanel.resetGame();
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
 
@@ -279,6 +280,7 @@ public class KeyHandler implements KeyListener {
 
                     if (gamePanel.ui.commandNum == 1) {
                         gamePanel.gameDifficulty = 2;
+                        gamePanel.resetGame();
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
@@ -286,6 +288,8 @@ public class KeyHandler implements KeyListener {
 
                     if (gamePanel.ui.commandNum == 2) {
                         gamePanel.gameDifficulty = 3;
+
+                        gamePanel.resetGame();
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.playSE(3);
                         gamePanel.playMusic(0);
