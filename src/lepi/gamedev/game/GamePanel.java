@@ -127,7 +127,6 @@ public class GamePanel extends JPanel implements Runnable {
 
              }
 
-
              //check if someone lost
              if(ball.x < 0){
                  //player has lost
@@ -136,15 +135,17 @@ public class GamePanel extends JPanel implements Runnable {
                      System.out.println("Player Right won with sore: " + player2Score);
                      gameState = endState;
                  }
-                 //check ball difficulty
-                 if(gameDifficulty == 1) {
-                     ball.setEasyValues();
-                 }
-                 if(gameDifficulty == 2) {
-                     ball.setDefaultValues();
-                 }
-                 if(gameDifficulty == 3) {
-                     ball.setHardValues();
+                 else {
+                     //check ball difficulty
+                     if(gameDifficulty == 1) {
+                         ball.setEasyValues();
+                     }
+                     if(gameDifficulty == 2) {
+                         ball.setDefaultValues();
+                     }
+                     if(gameDifficulty == 3) {
+                         ball.setHardValues();
+                     }
                  }
              }
              else if(ball.x > screenWidth){
@@ -154,15 +155,17 @@ public class GamePanel extends JPanel implements Runnable {
                      System.out.println("Player Left won with sore: " + player2Score);
                      gameState = endState;
                  }
-                 //check ball difficulty
-                 if(gameDifficulty == 1) {
-                     ball.setEasyValues();
-                 }
-                 if(gameDifficulty == 2) {
-                     ball.setDefaultValues();
-                 }
-                 if(gameDifficulty == 3) {
-                     ball.setHardValues();
+                 else {
+                     //check ball difficulty
+                     if(gameDifficulty == 1) {
+                         ball.setEasyValues();
+                     }
+                     if(gameDifficulty == 2) {
+                         ball.setDefaultValues();
+                     }
+                     if(gameDifficulty == 3) {
+                         ball.setHardValues();
+                     }
                  }
              }
 
@@ -239,7 +242,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
 
-        if (isSolo) {
+        if (isSolo == true  ) {
             if(gameDifficulty == 1) {
                 player.setEasyValuesPlayer();
             }
@@ -250,7 +253,7 @@ public class GamePanel extends JPanel implements Runnable {
                 player.setHardValuesPlayer();
             }
         }
-        else {
+        if (isSolo == false){
             player.setDefaultValues();
         }
 

@@ -19,7 +19,7 @@ public class Player extends Entity {
 
         solidArea = new Rectangle(x, y, playerSizeWidth, playerSizeHeight);
 
-        if (gamePanel.isSolo) {
+        if (gamePanel.isSolo == true) {
             if(gamePanel.gameDifficulty == 1) {
                 setEasyValuesPlayer();
             }
@@ -30,7 +30,7 @@ public class Player extends Entity {
                 setHardValuesPlayer();
             }
         }
-        else {
+        if (gamePanel.isSolo == false) {
             setDefaultValues();
         }
 
@@ -43,6 +43,7 @@ public class Player extends Entity {
         playerSizeHeight = 80;
         playerSizeWidth = 15;
         System.out.println(" AI Player speed is: " + speed);
+        System.out.println(" isSolo" + gamePanel.isSolo);
     }
 
     public void setEasyValuesPlayer() {

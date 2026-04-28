@@ -97,6 +97,7 @@ public class KeyHandler implements KeyListener {
                     if (gamePanel.ui.commandNum == 1) {
                         gamePanel.playSE(3);
                         gamePanel.isSolo = false;
+                        gamePanel.gameDifficulty = 2;
                         gamePanel.ui.titleScreenState = 4;
                     }
                     if (gamePanel.ui.commandNum == 2) {
@@ -206,6 +207,7 @@ public class KeyHandler implements KeyListener {
                         }
                         else {
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.resetGame();
                             gamePanel.playSE(3);
                             gamePanel.playMusic(0);
                         }
@@ -220,6 +222,7 @@ public class KeyHandler implements KeyListener {
                         }
                         else {
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.resetGame();
                             gamePanel.playSE(3);
                             gamePanel.playMusic(0);
                         }
@@ -233,6 +236,7 @@ public class KeyHandler implements KeyListener {
                         }
                         else {
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.resetGame();
                             gamePanel.playSE(3);
                             gamePanel.playMusic(0);
                         }

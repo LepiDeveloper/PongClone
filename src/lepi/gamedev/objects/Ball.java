@@ -15,14 +15,19 @@ public class Ball extends GameObject {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-        if(gamePanel.gameDifficulty == 1) {
-            setEasyValues();
+        if (gamePanel.isSolo == true) {
+            if(gamePanel.gameDifficulty == 1) {
+                setEasyValues();
+            }
+            if(gamePanel.gameDifficulty == 2) {
+                setDefaultValues();
+            }
+            if(gamePanel.gameDifficulty == 3) {
+                setHardValues();
+            }
         }
-        if(gamePanel.gameDifficulty == 2) {
+        if (gamePanel.isSolo == false) {
             setDefaultValues();
-        }
-        if(gamePanel.gameDifficulty == 3) {
-            setHardValues();
         }
 
     }
@@ -125,26 +130,39 @@ public class Ball extends GameObject {
 
     public void increaseSpeed(){
 
-        if(gamePanel.gameDifficulty == 1) {
+        if (gamePanel.isSolo == true) {
 
-            if(speed < MAX_SPEED){
-                speed ++;
+            if(gamePanel.gameDifficulty == 1) {
 
-                dx = (dx / Math.abs(dx)*speed);
-                dy = (dy / Math.abs(dy)*speed);
+                if(speed < MAX_SPEED){
+                    speed ++;
 
+                    dx = (dx / Math.abs(dx)*speed);
+                    dy = (dy / Math.abs(dy)*speed);
+
+                }
+            }
+            if(gamePanel.gameDifficulty == 2) {
+                if(speed < MAX_SPEED){
+                    speed ++;
+
+                    dx = (dx / Math.abs(dx)*speed);
+                    dy = (dy / Math.abs(dy)*speed);
+
+                }
+            }
+            if(gamePanel.gameDifficulty == 3) {
+
+                if(speed < MAX_SPEED){
+                    speed ++;
+
+                    dx = (dx / Math.abs(dx)*speed);
+                    dy = (dy / Math.abs(dy)*speed);
+
+                }
             }
         }
-        if(gamePanel.gameDifficulty == 2) {
-            if(speed < MAX_SPEED){
-                speed ++;
-
-                dx = (dx / Math.abs(dx)*speed);
-                dy = (dy / Math.abs(dy)*speed);
-
-            }
-        }
-        if(gamePanel.gameDifficulty == 3) {
+        if (gamePanel.isSolo == false) {
 
             if(speed < MAX_SPEED){
                 speed ++;
