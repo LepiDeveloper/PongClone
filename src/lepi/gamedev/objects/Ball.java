@@ -45,7 +45,7 @@ public class Ball extends GameObject {
         objectSizeWidth = 15;
 
         MAX_SPEED = 10;
-        speed = 5;
+        speed = 6;
         gamePanel.bounceCount = 0;
         dx = speed * xDirection;
         dy = speed * yDirection;
@@ -66,7 +66,7 @@ public class Ball extends GameObject {
         objectSizeWidth = 15;
 
         MAX_SPEED = 8;
-        speed = 3;
+        speed = 4;
         gamePanel.bounceCount = 0;
         dx = speed * xDirection;
         dy = speed * yDirection;
@@ -86,7 +86,7 @@ public class Ball extends GameObject {
         objectSizeWidth = 15;
 
         MAX_SPEED = 12;
-        speed = 7;
+        speed = 8;
         gamePanel.bounceCount = 0;
         dx = speed * xDirection;
         dy = speed * yDirection;

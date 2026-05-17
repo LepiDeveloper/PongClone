@@ -39,9 +39,15 @@ public class Player extends Entity {
     public void setDefaultValues() {
         x = 18; // left right
         y = 280;   // up down
-        speed = 4;
         playerSizeHeight = 80;
         playerSizeWidth = 15;
+
+        if (gamePanel.isSolo == true) {
+            speed = 8;
+        }
+        else {
+            speed = 4;
+        }
         System.out.println(" AI Player speed is: " + speed);
         System.out.println(" isSolo" + gamePanel.isSolo);
     }
@@ -49,7 +55,7 @@ public class Player extends Entity {
     public void setEasyValuesPlayer() {
         x = 18; // left right
         y = 280;   // up down
-        speed = 2;
+        speed = 6;
         playerSizeHeight = 80;
         playerSizeWidth = 15;
         System.out.println(" AI Player speed is: " + speed);
@@ -59,7 +65,7 @@ public class Player extends Entity {
     public void setHardValuesPlayer() {
         x = 18; // left right
         y = 280;   // up down
-        speed = 6;
+        speed = 10;
         playerSizeHeight = 80;
         playerSizeWidth = 15;
         System.out.println(" AI Player speed is: " + speed);
