@@ -204,11 +204,6 @@ public class UI {
             y = 250;
             g2.drawString(text, x, y);
 
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
-            text = "Testers: Cota";
-            y = 300;
-            g2.drawString(text, x, y);
-
             text = "Back";
             x = 415;
             y = 450;
